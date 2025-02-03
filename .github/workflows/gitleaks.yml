@@ -1,0 +1,27 @@
+name: chore
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # Gitleaks: https://github.com/zricethezav/gitleaks
+  # A SAST tool for detecting and preventing hardcoded secrets like
+  # passwords, api keys, and tokens in git repos.
+  gitleaks:
+    name: '🔒 Gitleaks'
+    runs-on: ubuntu-latest
+    steps:
+      - name: '☁️ checkout repository'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: '🔒 Run Gitleaks'
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
