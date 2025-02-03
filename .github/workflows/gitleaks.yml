@@ -7,6 +7,8 @@ on:
   pull_request:
     branches: [main]
 
+permissions: {}
+
 jobs:
   # Gitleaks: https://github.com/zricethezav/gitleaks
   # A SAST tool for detecting and preventing hardcoded secrets like
